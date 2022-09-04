@@ -6,6 +6,7 @@
 #include "TVk-log.h"
 #include "TVk-modular.h"
 #include "TVk-creation.h"
+#include "TVk-presets.h"
 
 // * Imported includes
 
@@ -18,29 +19,12 @@ namespace TVk
 {
     using string=std::string;
 
-   /* struct TVkcoreInstanceCreateInfo
+    typedef enum TVkVersion : uint32_t
     {
-        typedef enum TVkcoreInstanceCreateInfoFlags : FLAG
-        {
-            STYPE = 0b1<<0,
-            PNEXT = 0b1<<1,
-            FLAGS = 0b1<<2,
-            PAPPLICATIONINFO = 0b1<<3,
-            ENABLEDLAYERCOUNT = 0b1<<4,
-            PPENABLEDLAYERNAMES = 0b1<<5,
-            ENABLEDEXTENSIONCOUNT = 0b1<<6,
-            PPENABLEDEXTENSIONNAMES = 0b1<<7,
-            ALL = STYPE | PNEXT | FLAGS | PAPPLICATIONINFO |
-                ENABLEDLAYERCOUNT | PPENABLEDLAYERNAMES | ENABLEDEXTENSIONCOUNT | PPENABLEDEXTENSIONNAMES
-        } CreateInfoFlags;
-        CreateInfoFlags creationFlags;
-        VkInstanceCreateInfo createInfo;
-    };*/
-
-    struct TVkcoreCreateInfo
-    {
-        //TVkcoreInstanceCreateInfo
-    };
+        MAJOR = 1,
+        MINOR = 0,
+        PATCH = 0
+    } TVkVersion;
 
     /**
      * @brief Core class of Thesis-Vk

@@ -3,13 +3,17 @@
 
 namespace TVk
 {
-    // * Base struct for all CreateInfo's
+    // * Substructs
+
+    // Base struct for all CreateInfo's
     template<typename DataStruct, typename CustomizationFlags>
         struct GenericCreateInfo
     {
         CustomizationFlags m_customizationFlags;
-        DataStruct m_customCreateInfo;
+        DataStruct* m_customCreateInfo;
     };
+
+    // * CreateInfos
 
     typedef enum InstanceCustomizationFlags : FLAG
     {
@@ -25,6 +29,29 @@ namespace TVk
             ENABLEDLAYERCOUNT | PPENABLEDLAYERNAMES | ENABLEDEXTENSIONCOUNT | PPENABLEDEXTENSIONNAMES
     } InstanceCustomizationFlags;
     struct InstanceCreateInfo : GenericCreateInfo<VkInstanceCreateInfo, InstanceCustomizationFlags>{};
+
+    // TODO!: Make a TVk wrapper for VkApplication Info
+
+    // * TVkcore Stuff
+    /**
+     * @brief Flags for setting up TVkcore via TVkcoreCreateInfo
+     * 
+     */
+    typedef enum TVkcorePresets : uint32_t
+    {
+        CUSTOM = 0,
+        PRESET_WINDOW = 1,
+        PRESET_HEADLESS = 2
+    } TVkcorePresets;
+    /**
+     * @brief Struct for setting up TVkcore fully
+     * 
+     */
+    struct TVkcoreCreateInfo
+    {
+        TVkcorePresets m_presetMode;
+        InstanceCreateInfo* m_instanceCreateInfo;
+    };
 } // namespace TVk
 
 

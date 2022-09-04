@@ -21,7 +21,5 @@ int main()
     TVk::Debug("t->modified 1010:");
     TVk::extractStruct<double, int, float, char>(t, true);
 
-    TVk::InstanceCreateInfo ici;
-    ici.m_customizationFlags = {};
     return 0;
 }
