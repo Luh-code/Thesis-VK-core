@@ -3,7 +3,6 @@
 
 #include "pch.h"
 #include "TVk-creation.h"
-#include "TVk-presets.h"
 
 namespace TVk
 {
@@ -88,11 +87,6 @@ namespace TVk
         }
 
         modifyStruct<Args...>(_s, sd0);
-    }
-
-    void createConfigTree(TVkcoreCreateInfo& createInfo)
-    {
-        // TODO: Override preset data with custom data from/in createInfo
     }
 }
 

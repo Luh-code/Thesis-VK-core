@@ -164,6 +164,7 @@ namespace TVk
         std::string buf;
         TVkLog::variadic_unpack(buf, _msg...);
         _Crit(buf);
+        assert(false);
     };
 } // namespace TVk
 

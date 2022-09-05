@@ -5,11 +5,13 @@
 
 namespace TVk
 {
-    const char* windowPresetVkInstanceCreateInfoEnabledLayerNames[] =
+    // ? Create at runtime when preset required to reduce overhead
+
+    static const char* windowPresetVkInstanceCreateInfoEnabledLayerNames[] =
     {
         "VK_LAYER_KHRONOS_validation",
     };
-    VkInstanceCreateInfo* windowPresetVkInstanceCreateInfo =
+    static VkInstanceCreateInfo* windowPresetVkInstanceCreateInfo =
         new VkInstanceCreateInfo
     {
         //sType:
@@ -29,7 +31,7 @@ namespace TVk
         //enabledExtensionNames:
         nullptr, // TODO!: Make more user friendly to change
     };
-    VkApplicationInfo* windowPresetVkApplicationInfo =
+    static VkApplicationInfo* windowPresetVkApplicationInfo =
         new VkApplicationInfo
     {
         //sType:
@@ -47,7 +49,7 @@ namespace TVk
         //apiVersion:
         VK_VERSION_1_3, // TODO: Save Vulkan API version in TVk-core.h
     };
-    ApplicationInfo* windowPresetApplicationInfo =
+    static ApplicationInfo* windowPresetApplicationInfo =
         new ApplicationInfo
     {
         //m_customizationFlags:
@@ -55,7 +57,7 @@ namespace TVk
         //p_customCreateInfo:
         windowPresetVkApplicationInfo,
     };
-    InstanceCreateInfo* windowPresetInstanceCreateInfo =
+    static InstanceCreateInfo* windowPresetInstanceCreateInfo =
         new InstanceCreateInfo
     {
         //m_customizationFlags:
@@ -65,11 +67,11 @@ namespace TVk
         //p_applicationInfo:
         windowPresetApplicationInfo,
     };
-    TVkcoreCreateInfo* windowPreset =
+    static TVkcoreCreateInfo* windowPreset =
         new TVkcoreCreateInfo
     {
         //m_presetMode:
-        CUSTOM,
+        TP::CUSTOM,
         //m_instanceCreateInfo:
         windowPresetInstanceCreateInfo,
     };

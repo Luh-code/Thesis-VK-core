@@ -17,6 +17,7 @@ namespace TVk
 
     typedef enum struct ApplicationInfoFlags: FLAG
     {
+        NONE = 0b0,
         STYPE = 0b1<<0,
         PNEXT = 0b1<<1,
         PAPPLICATIONNAME = 0b1<<2,
@@ -32,6 +33,7 @@ namespace TVk
 
     typedef enum struct InstanceCustomizationFlags : FLAG
     {
+        NONE = 0b0,
         STYPE = 0b1<<0,
         PNEXT = 0b1<<1,
         FLAGS = 0b1<<2,
@@ -53,12 +55,12 @@ namespace TVk
      * @brief Flags for setting up TVkcore via TVkcoreCreateInfo
      * 
      */
-    typedef enum TVkcorePresets : uint32_t
+    typedef enum class TVkcorePresets : uint32_t
     {
         CUSTOM = 0,
         PRESET_WINDOW = 1,
         PRESET_HEADLESS = 2
-    } TVkcorePresets;
+    } TP;
     /**
      * @brief Struct for setting up TVkcore fully
      * 

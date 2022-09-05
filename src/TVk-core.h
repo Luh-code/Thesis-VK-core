@@ -35,7 +35,7 @@ namespace TVk
         using RetV=shf::RetV;
         using CreateInfo=TVkcoreCreateInfo;
     private:
-        std::vector<RetV(*)(void)> m_dprocess;
+        std::vector<RetV(*)(void)> m_dprocess; // ? Maybe dont do this
 
         // * Private Methods
 
@@ -51,13 +51,20 @@ namespace TVk
          * @return RetV
          */
         RetV _createRendersubpass();
+
         // Utils
         template<typename T>
-            inline int array_count(T* _a) // ? Inline for now maybe make macro
+            inline int array_count(T* _a) // ? Inline for now; maybe make macro
         {
             return (sizeof(_a) / sizeof((_a)[0]));
         }
     public:
+        /**
+         * @brief Configures m_ci for creation
+         *
+         * @return RetV 
+         */
+        RetV _createConfigTree();
         /**
          * @brief
          *
@@ -92,46 +99,46 @@ namespace TVk
          *
          * @return RetV
          */
-        RetV selectPhysicalDevice();
+        RetV selectPhysicalDevice() = delete;
         /**
          * @brief Create a VkDevice based on selected physical device
          *
          * @return RetV
          */
-        RetV createLogicalDevice();
+        RetV createLogicalDevice() = delete;
         /**
          * @brief Create a VkSwapchainKHR
          *
          * @return RetV
          */
-        RetV createSwapchain();
+        RetV createSwapchain() = delete;
         /**
          * @brief Destroys the swapchain
          *
          */
-        void destroySwapchain();
+        void destroySwapchain() = delete;
         /**
          * @brief Create a the amount of frame buffers defined in the createInfo
          *
          * @return RetV
          */
-        RetV createFrameBuffers();
+        RetV createFrameBuffers() = delete;
         /**
          * @brief Destroys all frame buffers
          *
          */
-        void destroyFrameBuffers();
+        void destroyFrameBuffers() = delete;
         /**
          * @brief Create Renderpasses as defined in the createInfo
          *
          * @return RetV
          */
-        RetV createRenderpasses();
+        RetV createRenderpasses() = delete;
         /**
          * @brief Destroys all Renderpasses
          *
          */
-        void destroyRenderpasses();
+        void destroyRenderpasses() = delete;
 
         /**
          * @brief Sets this TVkcore object up
@@ -142,14 +149,15 @@ namespace TVk
         RetV setup(CreateInfo& _ci)
         {
             this->m_ci = &_ci;
-            return setup();
+            //return setup();
+            return RetV(shfT, ERR_NONE);
         }
         /**
          * @brief Sets this TVkcore object up
          *
          * @return RetV
          */
-        RetV setup();
+        RetV setup() = delete;
 
         RetV(* pp_cprocess[])(void); // Function pointer[] for creation process
     };
