@@ -13,11 +13,11 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 
 set(PREPROCESSOR_DEFINITIONS EZV_SUPPORT_SDL LHG_VERBOSE EZV_INFO_OUTPUT LHG_LINUX)
 
-find_package(SDL2 REQUIRED)
+#find_package(SDL2 REQUIRED)
 find_package(Vulkan REQUIRED)
 
 add_compile_definitions(${PREPROCESSOR_DEFINITIONS})
-add_compile_options("-O2")
+#add_compile_options("-O2")
 
 set(SOURCE ${PROJECT_SOURCE_DIR}/src/TVk-core.cpp)
 
@@ -27,8 +27,10 @@ target_compile_definitions(TVk PUBLIC ${PREPROCESSOR_DEFINITIONS})
 target_include_directories(TVk PUBLIC ${PROJECT_SOURCE_DIR}/dependencies/FlagEx/include
                                 ${PROJECT_SOURCE_DIR}/dependencies/Sheriff/include
                                 #${PROJECT_SOURCE_DIR}/dependencies/Vulkan/1.3.216.0/x86_64/include
+                                ${Vulkan_INCLUDE_DIRS}
                                 ${SDL2_INCLUDE_DIRS})
 target_link_libraries(TVk PUBLIC #${PROJECT_SOURCE_DIR}/dependencies/Vulkan/1.3.216.0/x86_64/lib/libvulkan.so
+                                ${Vulkan_LIBRARIES}
                                 ${SDL2_LIBRARIES})
 target_precompile_headers(TVk PUBLIC ${PROJECT_SOURCE_DIR}/src/pch.h)
 # Setup Testing

@@ -8,7 +8,7 @@ set(PREPROCESSOR_DEFINITIONS EZV_SUPPORT_SDL LHG_VERBOSE EZV_INFO_OUTPUT)
 
 add_compile_definitions(${PREPROCESSOR_DEFINITIONS})
 
-find_package(SDL2 REQUIRED)
+#find_package(SDL2 REQUIRED)
 find_package(Vulkan REQUIRED)
 
 set(COMMON_INCLUDES ${PROJECT_SOURCE_DIR}/src
@@ -17,7 +17,7 @@ set(COMMON_INCLUDES ${PROJECT_SOURCE_DIR}/src
                     #${PROJECT_SOURCE_DIR}/dependencies/Vulkan/1.3.216.0/x86_64/include
                     ${Vulkan_INCLUDE_DIRS}
                     ${SDL2_INCLUDE_DIRS})
-set(COMMON_LIBS ${PROJECT_SOURCE_DIR}/bin/lib/libTVk.a
+set(COMMON_LIBS ${PROJECT_SOURCE_DIR}/bin/lib/Debug/TVk.lib
                 #${PROJECT_SOURCE_DIR}/dependencies/Vulkan/1.3.216.0/x86_64/lib/libvulkan.so
                 ${Vulkan_LIBRARIES}
                 ${SDL2_LIBRARIES})

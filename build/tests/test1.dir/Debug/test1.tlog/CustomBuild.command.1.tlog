@@ -1,0 +1,10 @@
+^D:\DEV\THESIS VK\TESTS\CMAKELISTS.TXT
+setlocal
+"D:\Visual Studio\Community 2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SD:/dev/Thesis Vk" "-BD:/dev/Thesis Vk/build" --check-stamp-file "D:/dev/Thesis Vk/build/tests/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
