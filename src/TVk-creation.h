@@ -10,12 +10,27 @@ namespace TVk
         struct GenericCreateInfo
     {
         CustomizationFlags m_customizationFlags;
-        DataStruct* m_customCreateInfo;
+        DataStruct* p_customCreateInfo;
     };
 
     // * CreateInfos
 
-    typedef enum InstanceCustomizationFlags : FLAG
+    typedef enum struct ApplicationInfoFlags: FLAG
+    {
+        STYPE = 0b1<<0,
+        PNEXT = 0b1<<1,
+        PAPPLICATIONNAME = 0b1<<2,
+        APPLICATIONVERSION = 0b1<<3,
+        PENGINENAME = 0b1<<4,
+        ENGINEVERSION = 0b1<<5,
+        APIVERSION = 0b1<<6,
+        ALL = STYPE | PNEXT | PAPPLICATIONNAME |
+            APPLICATIONVERSION | PENGINENAME | ENGINEVERSION |
+            APIVERSION,
+    } AI;
+    struct ApplicationInfo : GenericCreateInfo<VkApplicationInfo, ApplicationInfoFlags> {};
+
+    typedef enum struct InstanceCustomizationFlags : FLAG
     {
         STYPE = 0b1<<0,
         PNEXT = 0b1<<1,
@@ -27,10 +42,11 @@ namespace TVk
         PPENABLEDEXTENSIONNAMES = 0b1<<7,
         ALL = STYPE | PNEXT | FLAGS | PAPPLICATIONINFO |
             ENABLEDLAYERCOUNT | PPENABLEDLAYERNAMES | ENABLEDEXTENSIONCOUNT | PPENABLEDEXTENSIONNAMES
-    } InstanceCustomizationFlags;
-    struct InstanceCreateInfo : GenericCreateInfo<VkInstanceCreateInfo, InstanceCustomizationFlags>{};
-
-    // TODO!: Make a TVk wrapper for VkApplication Info
+    } ICI;
+    struct InstanceCreateInfo : GenericCreateInfo<VkInstanceCreateInfo, InstanceCustomizationFlags>
+    {
+        ApplicationInfo* p_applicationInfo;
+    };
 
     // * TVkcore Stuff
     /**
@@ -50,7 +66,7 @@ namespace TVk
     struct TVkcoreCreateInfo
     {
         TVkcorePresets m_presetMode;
-        InstanceCreateInfo* m_instanceCreateInfo;
+        InstanceCreateInfo* p_instanceCreateInfo;
     };
 } // namespace TVk
 

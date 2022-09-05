@@ -41,7 +41,6 @@ namespace TVk
         _StructData& extractStruct (T* _s, bool _print)
     {
         _StructData* _sd = new _StructData();
-        //Debug("Extraction");
         _extractStruct<T, Args...>(*_sd, _s, _print);
         return *_sd;
     }
