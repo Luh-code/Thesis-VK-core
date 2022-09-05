@@ -1,9 +1,0 @@
-# CMake generation dependency list for this directory.
-D:/Visual Studio/Community 2022/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.21/Modules/CTest.cmake
-D:/Visual Studio/Community 2022/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.21/Modules/CTestTargets.cmake
-D:/Visual Studio/Community 2022/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.21/Modules/CTestUseLaunchers.cmake
-D:/Visual Studio/Community 2022/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.21/Modules/DartConfiguration.tcl.in
-D:/Visual Studio/Community 2022/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake
-D:/Visual Studio/Community 2022/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.21/Modules/FindPackageMessage.cmake
-D:/Visual Studio/Community 2022/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.21/Modules/FindVulkan.cmake
-D:/dev/Thesis Vk/tests/CMakeLists.txt
