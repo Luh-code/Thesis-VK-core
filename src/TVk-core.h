@@ -52,9 +52,16 @@ namespace TVk
          */
         RetV _createRendersubpass();
 
+        CreateInfo* m_selectedPreset;
+        CreateInfo* m_tempCreate;
+
+        RetV _configureInstanceCreateInfo
+            (const CreateInfo*& _pre, const CreateInfo*& _ci);
+
         // Utils
         template<typename T>
             inline int array_count(T* _a) // ? Inline for now; maybe make macro
+            // ? Rename to _array_count
         {
             return (sizeof(_a) / sizeof((_a)[0]));
         }
@@ -64,7 +71,7 @@ namespace TVk
          *
          * @return RetV 
          */
-        RetV _createConfigTree();
+        RetV _configTree();
         /**
          * @brief
          *

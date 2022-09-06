@@ -2,16 +2,25 @@
 
 namespace TVk
 {
-    shf::RetV TVkcore::_createConfigTree()
+    shf::RetV TVkcore::_configureInstanceCreateInfo
+        (const CreateInfo*& _pre, const CreateInfo*& _ci)
+    {
+        _pre = pre->p_instanceCreateInfo;
+        *_ci = *_pre;
+        modifyStruct(_ci, _ci->m_customizationFlags, _pre);
+
+        return shf::RetV(shfT, ERR_NONE);
+    }
+
+    shf::RetV TVkcore::_configTree()
     {
         // TODO: Override preset data with custom data from/in createInfo
-        CreateInfo* preset = nullptr;
-        switch (m_ci->m_presetMode)
+        switch (m_ci->m_presetMode) // select correct preset
         {
             case TP::CUSTOM:
                 break;
             case TP::PRESET_WINDOW:
-            preset = windowPreset;
+                m_selectedPreset = windowPreset;
                 break;
             case TP::PRESET_HEADLESS:
                 Crit("Headless preset unavailable!");
@@ -19,6 +28,11 @@ namespace TVk
             default:
                 Crit("Preset unavailable");
         }
+        *m_tempCreate = *m_selectedPreset;
+        int* ciPointer = reinterpret_cast<int*>(m_tempCreate);
+        int* prePointer = reinterpret_cast<int*>(m_selectedPreset);
+
+        _configureInstanceCreateInfo(reinterpret_cast<CreateInfo*>ciPointer);
 
         return shf::RetV(shfT, ERR_NONE);
     }

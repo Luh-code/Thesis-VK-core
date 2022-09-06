@@ -52,7 +52,7 @@ int main()
 
     TVk::TVkcore* tvkcore = new TVk::TVkcore(*createInfo);
 
-    tvkcore->_createConfigTree();
+    tvkcore->_configTree();
 
     return 0;
 }
