@@ -1,16 +1,20 @@
 #ifndef TVK_CREATION_H
 #define TVK_CREATION_H
 
+#include "TVk-modular.h"
+
 namespace TVk
 {
     // * Substructs
 
     // Base struct for all CreateInfo's
-    template<typename DataStruct, typename CustomizationFlags>
+    template<typename DataStruct, typename CustomizationFlags, typename... Args>
         struct GenericCreateInfo
     {
         CustomizationFlags m_customizationFlags;
         DataStruct* p_customCreateInfo;
+
+        void _compile(DataStruct& _data, Args... _custom);
     };
 
     // * CreateInfos
@@ -45,9 +49,24 @@ namespace TVk
         ALL = STYPE | PNEXT | FLAGS | PAPPLICATIONINFO |
             ENABLEDLAYERCOUNT | PPENABLEDLAYERNAMES | ENABLEDEXTENSIONCOUNT | PPENABLEDEXTENSIONNAMES
     } ICI;
-    struct InstanceCreateInfo : GenericCreateInfo<VkInstanceCreateInfo, InstanceCustomizationFlags>
+    struct InstanceCreateInfo:
+        public GenericCreateInfo<VkInstanceCreateInfo, InstanceCustomizationFlags>
     {
         ApplicationInfo* p_applicationInfo;
+        void _compile(VkInstanceCreateInfo& _data)
+        {
+            modifyStruct<
+                VkStructureType,
+                const void*,
+                VkInstanceCreateFlags,
+                const VkApplicationInfo*,
+                uint32_t,
+                const char* const*,
+                uint32_t,
+                const char* const*,
+                VkInstanceCreateInfo>
+                (&_data, static_cast<FLAG>(m_customizationFlags), p_customCreateInfo);
+        }
     };
 
     // * TVkcore Stuff
@@ -55,7 +74,7 @@ namespace TVk
      * @brief Flags for setting up TVkcore via TVkcoreCreateInfo
      * 
      */
-    typedef enum class TVkcorePresets : uint32_t
+    typedef enum struct TVkcorePresets : uint32_t
     {
         CUSTOM = 0,
         PRESET_WINDOW = 1,

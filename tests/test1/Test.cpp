@@ -45,7 +45,7 @@ int main()
     TVk::TVkcoreCreateInfo* createInfo = new TVk::TVkcoreCreateInfo
     {
         //m_presetMode:
-        TVk::TP::PRESET_HEADLESS,
+        TVk::TP::PRESET_WINDOW,
         //m_instanceCreateInfo:
         instanceCreateInfo,
     };

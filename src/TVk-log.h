@@ -12,9 +12,10 @@ namespace TVkLog
     template<typename T, typename... Args>
         static void variadic_unpack(std::string& buf, const T arg, const Args... args)
     {
-        std::ostringstream oss;
-        oss << arg;
-        buf.append(oss.str());
+        // ! Trying to print out objects will result in nothing, because it occasionally casuses errors
+        //std::ostringstream oss;
+        //oss << arg;
+        //buf.append(oss.str());
         
         variadic_unpack(buf, args...);
     }
