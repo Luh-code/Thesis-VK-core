@@ -33,7 +33,11 @@ namespace TVk
             APPLICATIONVERSION | PENGINENAME | ENGINEVERSION |
             APIVERSION,
     } AI;
-    struct ApplicationInfo : GenericCreateInfo<VkApplicationInfo, ApplicationInfoFlags> {};
+    struct ApplicationInfo :
+        public GenericCreateInfo<VkApplicationInfo, ApplicationInfoFlags>
+    {
+        compile
+    };
 
     typedef enum struct InstanceCustomizationFlags : FLAG
     {
@@ -49,11 +53,11 @@ namespace TVk
         ALL = STYPE | PNEXT | FLAGS | PAPPLICATIONINFO |
             ENABLEDLAYERCOUNT | PPENABLEDLAYERNAMES | ENABLEDEXTENSIONCOUNT | PPENABLEDEXTENSIONNAMES
     } ICI;
-    struct InstanceCreateInfo:
+    struct InstanceCreateInfo: // * InstanceCreateInfo
         public GenericCreateInfo<VkInstanceCreateInfo, InstanceCustomizationFlags>
     {
         ApplicationInfo* p_applicationInfo;
-        void _compile(VkInstanceCreateInfo& _data)
+        void _compile(VkInstanceCreateInfo& _data) // ! Fuck
         {
             modifyStruct<
                 VkStructureType,
@@ -66,6 +70,7 @@ namespace TVk
                 const char* const*,
                 VkInstanceCreateInfo>
                 (&_data, static_cast<FLAG>(m_customizationFlags), p_customCreateInfo);
+            p_applicationInfo->_compile(p_applicationInfo);
         }
     };
 

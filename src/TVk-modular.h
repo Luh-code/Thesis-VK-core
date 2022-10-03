@@ -25,7 +25,7 @@ namespace TVk
         _data.push_back(reinterpret_cast<_Adress>(_a));
         _pos++;//=sizeof(Arg);
         if (!(_pos<_data.size())) return;
-        _extractStruct<T, Args...>(_data, _s, (reinterpret_cast<char*>(_a)+sizeof(Arg)), _pos, _print); // TODO: Change _pos to count iterations not byte offset
+        _extractStruct<T, Args...>(_data, _s, (reinterpret_cast<char*>(_a)+sizeof(Arg)), _pos, _print);
     }
     template<typename T, typename Arg, typename... Args>
         void _extractStruct (_StructData& _data, T* _s, bool _print)
