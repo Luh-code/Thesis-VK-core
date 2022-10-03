@@ -1,74 +1,30 @@
 #ifndef TVK_CREATION_H
 #define TVK_CREATION_H
 
+#include "pch.h"
+
 namespace TVk
 {
-    // * Substructs
+    typedef enum StructType : size_t
+    {
 
-    // Base struct for all CreateInfo's
-    template<typename DataStruct, typename CustomizationFlags>
-        struct GenericCreateInfo
-    {
-        CustomizationFlags m_customizationFlags;
-        DataStruct* p_customCreateInfo;
-    };
+    } ST;
 
-    // * CreateInfos
+    void 
 
-    typedef enum struct ApplicationInfoFlags: FLAG
+    struct TVkCoreCreateInfo
     {
-        NONE = 0b0,
-        STYPE = 0b1<<0,
-        PNEXT = 0b1<<1,
-        PAPPLICATIONNAME = 0b1<<2,
-        APPLICATIONVERSION = 0b1<<3,
-        PENGINENAME = 0b1<<4,
-        ENGINEVERSION = 0b1<<5,
-        APIVERSION = 0b1<<6,
-        ALL = STYPE | PNEXT | PAPPLICATIONNAME |
-            APPLICATIONVERSION | PENGINENAME | ENGINEVERSION |
-            APIVERSION,
-    } AI;
-    struct ApplicationInfo : GenericCreateInfo<VkApplicationInfo, ApplicationInfoFlags> {};
+    private:
+        std::map _data<StructType, byte*> = {};
+    public:
+        template<typename T>
+            inline T operator[](T type)
+        {
+            if (_data[type] == nullptr)
+            {
 
-    typedef enum struct InstanceCustomizationFlags : FLAG
-    {
-        NONE = 0b0,
-        STYPE = 0b1<<0,
-        PNEXT = 0b1<<1,
-        FLAGS = 0b1<<2,
-        PAPPLICATIONINFO = 0b1<<3,
-        ENABLEDLAYERCOUNT = 0b1<<4,
-        PPENABLEDLAYERNAMES = 0b1<<5,
-        ENABLEDEXTENSIONCOUNT = 0b1<<6,
-        PPENABLEDEXTENSIONNAMES = 0b1<<7,
-        ALL = STYPE | PNEXT | FLAGS | PAPPLICATIONINFO |
-            ENABLEDLAYERCOUNT | PPENABLEDLAYERNAMES | ENABLEDEXTENSIONCOUNT | PPENABLEDEXTENSIONNAMES
-    } ICI;
-    struct InstanceCreateInfo : GenericCreateInfo<VkInstanceCreateInfo, InstanceCustomizationFlags>
-    {
-        ApplicationInfo* p_applicationInfo;
-    };
-
-    // * TVkcore Stuff
-    /**
-     * @brief Flags for setting up TVkcore via TVkcoreCreateInfo
-     * 
-     */
-    typedef enum class TVkcorePresets : uint32_t
-    {
-        CUSTOM = 0,
-        PRESET_WINDOW = 1,
-        PRESET_HEADLESS = 2
-    } TP;
-    /**
-     * @brief Struct for setting up TVkcore fully
-     * 
-     */
-    struct TVkcoreCreateInfo
-    {
-        TVkcorePresets m_presetMode;
-        InstanceCreateInfo* p_instanceCreateInfo;
+            }
+        };
     };
 } // namespace TVk
 

@@ -3,6 +3,7 @@
 #include <string>
 #include <functional>
 #include <cassert>
+#include <map>
 
 #include "vulkan/vulkan.h"
 

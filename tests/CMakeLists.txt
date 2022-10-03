@@ -28,3 +28,8 @@ add_executable(test1 test1/Test.cpp)
 target_include_directories(test1 PUBLIC ${COMMON_INCLUDES})
 target_link_libraries(test1 PUBLIC ${COMMON_LIBS})
 add_test(Test1 test1)
+
+#add_executable(test2 test2/Test.cpp)
+#target_include_directories(test2 PUBLIC ${COMMON_INCLUDES})
+#target_link_libraries(test2 PUBLIC ${COMMON_LIBS})
+#add_test(Test2 test2)

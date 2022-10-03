@@ -4,7 +4,6 @@
 // * Project includes
 #include "pch.h" // Precompiled
 #include "TVk-log.h"
-#include "TVk-modular.h"
 #include "TVk-creation.h"
 #include "TVk-presets.h"
 
@@ -33,7 +32,7 @@ namespace TVk
     class TVkcore
     {
         using RetV=shf::RetV;
-        using CreateInfo=TVkcoreCreateInfo;
+        using CreateInfo=TVkCoreCreateInfo;
     private:
         std::vector<RetV(*)(void)> m_dprocess; // ? Maybe dont do this
 
@@ -52,9 +51,13 @@ namespace TVk
          */
         RetV _createRendersubpass();
 
+        RetV _configureInstanceCreateInfo
+            (const CreateInfo*& _pre, const CreateInfo*& _ci);
+
         // Utils
         template<typename T>
             inline int array_count(T* _a) // ? Inline for now; maybe make macro
+            // ? Rename to _array_count
         {
             return (sizeof(_a) / sizeof((_a)[0]));
         }
@@ -64,7 +67,7 @@ namespace TVk
          *
          * @return RetV 
          */
-        RetV _createConfigTree();
+        RetV _configTree();
         /**
          * @brief
          *
