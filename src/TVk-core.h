@@ -4,7 +4,6 @@
 // * Project includes
 #include "pch.h" // Precompiled
 #include "TVk-log.h"
-#include "TVk-modular.h"
 #include "TVk-creation.h"
 #include "TVk-presets.h"
 
@@ -33,7 +32,7 @@ namespace TVk
     class TVkcore
     {
         using RetV=shf::RetV;
-        using CreateInfo=TVkcoreCreateInfo;
+        using CreateInfo=TVkCoreCreateInfo;
     private:
         std::vector<RetV(*)(void)> m_dprocess; // ? Maybe dont do this
 
@@ -51,9 +50,6 @@ namespace TVk
          * @return RetV
          */
         RetV _createRendersubpass();
-
-        CreateInfo* m_selectedPreset;
-        CreateInfo* m_tempCreate;
 
         RetV _configureInstanceCreateInfo
             (const CreateInfo*& _pre, const CreateInfo*& _ci);
