@@ -6,6 +6,7 @@
 #include "TVk-log.h"
 #include "TVk-creation.h"
 #include "TVk-presets.h"
+#include "memory.h"
 
 // * Imported includes
 
@@ -162,7 +163,7 @@ namespace TVk
          */
         RetV setup() = delete;
 
-        RetV(* pp_cprocess[])(void); // Function pointer[] for creation process
+        //RetV(* pp_cprocess[])(void); // Function pointer[] for creation process
     };
 }
 

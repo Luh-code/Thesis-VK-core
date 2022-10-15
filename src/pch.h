@@ -4,6 +4,10 @@
 #include <functional>
 #include <cassert>
 #include <map>
+#include <memory>
+#include <tuple>
+#include <type_traits>
+#include <concepts>
 
 #include "vulkan/vulkan.h"
 
