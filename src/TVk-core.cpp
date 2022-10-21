@@ -1,15 +1,20 @@
+//#include "pch.h"
 #include "TVk-core.h"
 
 namespace TVk
 {
-    shf::RetV TVkcore::createVulkanInstance()
+    shf::RetV* TVkcore::createVulkanInstance()
     {
-        /*VkInstanceCreateInfo ci = {VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO};
+        const VkInstanceCreateInfo* temp = static_cast<const VkInstanceCreateInfo*>(m_ci[VK_INSTANCE_CREATE_INFO]);
+        if(vkCreateInstance(
+            temp,
+            nullptr,//m_ci[VK_ALLOCATION_CALLBACKS],
+            m_data->p_instance
+            ) != VK_TRUE)
+        {
+            return new shf::RetV(shfT, ERR_INSTANCE_CREATION);
+        }
 
-        VKA(vkCreateInstance(
-            &ci,
-            &instance
-        ));*/
-        return shf::RetV(shfT, ERR_NONE);
+        return new shf::RetV(shfT, ERR_NONE);
     }
 }

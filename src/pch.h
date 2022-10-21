@@ -1,3 +1,6 @@
+#ifndef PCH_H
+#define PCH_H
+
 #include <stdio.h>
 #include <vector>
 #include <string>
@@ -13,3 +16,5 @@
 
 #include "sheriff-base.h"
 #include "flagex_base.h"
+
+#endif // PCH_H

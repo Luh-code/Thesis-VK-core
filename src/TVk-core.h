@@ -6,14 +6,16 @@
 #include "TVk-log.h"
 #include "TVk-creation.h"
 #include "TVk-presets.h"
-#include "memory.h"
+//#include "memory.h"
 
 // * Imported includes
 
 // * Definitions
-#define ASSERT_VULKAN(val) if((val) != VK_SUCCESS) { TVk::Crit("An error occured in an attempted vulkan call"); assert(false); }
+#define VK_FAIL(val) if((val) != VK_SUCCESS)
+#define ASSERT_VULKAN(val) VKFAIL(val) { TVk::Crit("An error occured in an attempted vulkan call"); assert(false); }
 #define VK(f) f
 #define VKA(f) ASSERT_VULKAN(VK(f))
+#define VKF(val) VK_FAIL(val)
 
 namespace TVk
 {
@@ -25,6 +27,12 @@ namespace TVk
         MINOR = 0,
         PATCH = 0
     } TVkVersion;
+
+    // Vulkan Objects
+    struct TVkData
+    {
+        VkInstance* p_instance;
+    };
 
     /**
      * @brief Core class of Thesis-Vk
@@ -63,33 +71,26 @@ namespace TVk
             return (sizeof(_a) / sizeof((_a)[0]));
         }
     public:
-        /**
-         * @brief Configures m_ci for creation
-         *
-         * @return RetV 
-         */
-        RetV _configTree();
-        /**
-         * @brief
-         *
-         *
-         */
+        // * Vulkan Objects
+        TVkData* m_data = new TVkData(); // TODO: add to destructor
+
         enum Errors : int32_t
         {
             ERR_NONE = 0,
             ERR_GENERIC = -1,
+            ERR_INSTANCE_CREATION = -2,
         };
         shf::Territory shfT = shf::Territory("TVkcore", ERR_NONE); // ? Make std::shared_ptr to handle error, when object deleted
 
-        CreateInfo* m_ci;
+        CreateInfo* p_ci;
+        CreateInfo& m_ci;
 
         // * Constructor and Destructor
-        TVkcore();
-        TVkcore(CreateInfo& _ci)
+        TVkcore(CreateInfo* ci)
+         : p_ci(ci), m_ci(*p_ci)
         {
-            setup(_ci);
         }
-        ~TVkcore();
+        //~TVkcore();
 
         // * Public Methods
         /**
@@ -97,7 +98,7 @@ namespace TVk
          *
          * @return RetV
          */
-        RetV createVulkanInstance();
+        RetV* createVulkanInstance();
         /**
          * @brief Selects a physical device(GPU), defined in the createInfo struct
          *
@@ -143,19 +144,6 @@ namespace TVk
          *
          */
         void destroyRenderpasses() = delete;
-
-        /**
-         * @brief Sets this TVkcore object up
-         *
-         * @param _ci
-         * @return RetV
-         */
-        RetV setup(CreateInfo& _ci)
-        {
-            this->m_ci = &_ci;
-            //return setup();
-            return RetV(shfT, ERR_NONE);
-        }
         /**
          * @brief Sets this TVkcore object up
          *

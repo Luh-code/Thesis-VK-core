@@ -30,9 +30,9 @@ target_include_directories(TVk PUBLIC ${PROJECT_SOURCE_DIR}/dependencies/FlagEx/
                                 ${Vulkan_INCLUDE_DIRS}
                                 ${SDL2_INCLUDE_DIRS})
 target_link_libraries(TVk PUBLIC #${PROJECT_SOURCE_DIR}/dependencies/Vulkan/1.3.216.0/x86_64/lib/libvulkan.so
-                                ${Vulkan_LIBRARIES}
+                                #${Vulkan_LIBRARIES}
                                 ${SDL2_LIBRARIES})
-target_precompile_headers(TVk PUBLIC ${PROJECT_SOURCE_DIR}/src/pch.h)
+#target_precompile_headers(TVk PUBLIC ${PROJECT_SOURCE_DIR}/src/pch.h)
 # Setup Testing
 add_subdirectory(tests)
 

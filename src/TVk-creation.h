@@ -5,13 +5,16 @@
 
 #define CAST_TO_STRUCT(t) (reinterpret_cast<t*>(TVk::_base_pointer))
 #define VK_INSTANCE_CREATE_INFO CAST_TO_STRUCT(VkInstanceCreateInfo)
+#define VK_ALLOCATION_CALLBACKS CAST_TO_STRUCT(VkAllocationCallbacks)
+#define VK_APPLICATION_INFO CAST_TO_STRUCT(VkApplicationInfo)
+#define CTS(t) CAST_TO_STRUCT(t)
 
 namespace TVk
 {
 
     // * 9 Bytes overhead, reduce if possible
-    char _base_type = 0;
-    char* _base_pointer = &_base_type;
+    static char _base_type = 0;
+    static char* _base_pointer = &_base_type;
 
     class TVkDeleterBase
     {
@@ -43,19 +46,20 @@ namespace TVk
 
     struct TVkCoreCreateInfo
     {
-    private:
-        std::map<std::string, std::tuple<uint64_t, TVkDeleterBase*>> _data {};
+    public:
+        std::map<std::string, std::tuple<uint64_t, TVkDeleterBase*>> _data =
+            std::map<std::string, std::tuple<uint64_t, TVkDeleterBase*>>();
     public:
     // TODO: update when cpp23 releases, to use (t, int inx) as arguments for [], for structs, that can appear multiple times
 
-        template<NotSomeType<TVkCoreCreateInfo> T, OnlySomeType<TVkCoreCreateInfo> Ret>
+        /* template<NotSomeType<TVkCoreCreateInfo> T, OnlySomeType<TVkCoreCreateInfo> Ret>
             Ret& operator[](T)
         {
             return *this;
-        };
+        };*/
 
         template<NotSomeType<TVkCoreCreateInfo> T, NotSomeType<TVkCoreCreateInfo> R = T>
-            R& operator[](T)
+            R operator[](T)
         {
             T temp;
 
@@ -68,7 +72,7 @@ namespace TVk
                 _data[name] = std::make_tuple(reinterpret_cast<uint64_t>(malloc(sizeof(*temp))), temp2);
             }
 
-            return reinterpret_cast<T&>(std::get<0>(_data[name]));
+            return reinterpret_cast<T>(std::get<0>(_data[name]));
         };
 
         ~TVkCoreCreateInfo()

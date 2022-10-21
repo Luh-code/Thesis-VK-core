@@ -1,0 +1,13 @@
+"filename", "language", "C++", "Markdown", "comment", "blank", "total"
+"d:\dev\Thesis Vk\LICENCE.md", "Markdown", 0, 17, 0, 5, 22
+"d:\dev\Thesis Vk\README.md", "Markdown", 0, 11, 0, 5, 16
+"d:\dev\Thesis Vk\src\TVk-core.cpp", "C++", 16, 0, 1, 2, 19
+"d:\dev\Thesis Vk\src\TVk-core.h", "C++", 66, 0, 74, 18, 158
+"d:\dev\Thesis Vk\src\TVk-creation.h", "C++", 65, 0, 9, 17, 91
+"d:\dev\Thesis Vk\src\TVk-log.h", "C++", 145, 0, 6, 21, 172
+"d:\dev\Thesis Vk\src\TVk-presets.h", "C++", 7, 0, 0, 4, 11
+"d:\dev\Thesis Vk\src\memory.h", "C++", 26, 0, 5, 12, 43
+"d:\dev\Thesis Vk\src\pch.h", "C++", 16, 0, 0, 4, 20
+"d:\dev\Thesis Vk\test.cpp", "C++", 26, 0, 1, 8, 35
+"d:\dev\Thesis Vk\tests\test1\Test.cpp", "C++", 30, 0, 4, 5, 39
+"Total", "-", 397, 28, 100, 101, 626

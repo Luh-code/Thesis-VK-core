@@ -1,21 +1,42 @@
-#include <stdio.h>
-#include <iostream>
-#include <string>
+//#include <stdio.h>
+//#include <iostream>
+//#include <string>
 #include "TVk-core.h"
+//#include "memory.h"
 
 int main()
 {
-    printMemoryUsage();
-    TVk::TVkCoreCreateInfo* i0 = new TVk::TVkCoreCreateInfo();
-    TVk::TVkCoreCreateInfo& ir = *i0;// *(*i0)[VK_INSTANCE_CREATE_INFO];
-    std::cout<<"Before: "<<ir[VK_INSTANCE_CREATE_INFO]->enabledLayerCount<<std::endl;
-    printMemoryUsage();
-    ir[VK_INSTANCE_CREATE_INFO]->enabledLayerCount = 5;
-    printMemoryUsage();
-    std::cout<<"After: "<<ir[VK_INSTANCE_CREATE_INFO]->enabledLayerCount<<std::endl;
-    std::cout<<"Test\n";
+    TVk::TVkCoreCreateInfo* ci = new TVk::TVkCoreCreateInfo();
+    TVk::TVkcore* core = new TVk::TVkcore(ci);
 
-    delete i0;
-    printMemoryUsage();
+    VkApplicationInfo* vai = core->m_ci[VK_APPLICATION_INFO];
+    vai->sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
+    vai->pNext = nullptr;
+    vai->pApplicationName = "TestApp"; // nullptr if problems occur
+    vai->applicationVersion = 1;
+    vai->pEngineName = "Thesis-Vk";
+    vai->engineVersion = 1;
+    vai->apiVersion = VK_VERSION_1_3;
+
+    VkInstanceCreateInfo* vici = core->m_ci[VK_INSTANCE_CREATE_INFO];
+    vici->sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+    vici->pNext = nullptr;
+    vici->flags = VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;
+    vici->pApplicationInfo = static_cast<const VkApplicationInfo*>(vai);
+    vici->enabledLayerCount = 0u;
+    //vici->ppEnabledLayerNames = nullptr;
+    vici->enabledExtensionCount = 0u;
+    //vici->ppEnabledExtensionNames = nullptr;
+
+    //core->m_ci._data["struct "] = std::make_tuple<TVk::TVkDeleter<nullptr_t>, nullptr>;
+
+    IF_SHF_ERR(core->createVulkanInstance())
+    {
+        //std::cout<<err.m_value<<std::endl;
+        TVk::Err("Error Code: ", static_cast<const char*>(err), std::to_string(err.m_value).c_str());
+    }
+
+    delete core;
+    delete ci;
     return 0;
 }

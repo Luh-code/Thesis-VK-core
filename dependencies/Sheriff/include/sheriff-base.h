@@ -4,7 +4,7 @@
 #include <functional>
 
 //#define IF_SHF_ERR(ret) if (shf::RetV err = t.test(); err.m_value != err.p_territory->m_noErr)
-#define IF_SHF_ERR(ret) if (shf::RetV& err = ret; !err)
+#define IF_SHF_ERR(ret) if (shf::RetV& err = *ret; !err)
 
 namespace shf
 {

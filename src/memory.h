@@ -4,6 +4,8 @@
 #include <memory>
 #include <iostream>
 
+// Credit to TheCherno (https://www.youtube.com/channel/UCQ-W1KE9EYfdxhL6S4twUNw) for the memory management code shown here
+
 struct MemoryMetrics
 {
     size_t totalAllocated = 0;
@@ -31,5 +33,11 @@ static void printMemoryUsage()
 {
     std::cout << "Current Heap Memory Usage: " << memoryMetrics.currentUsage() << " Bytes\n";
 }
+
+// ----------------------------------------------------
+
+// Vulkan memory allocation
+
+
 
 #endif // MEMORY_H
