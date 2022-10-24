@@ -1,4 +1,7 @@
 # Thesis-VK-core
+## THIS REPO IS FROZEN
+For a while, I won't work on this. Ill get to it eventually tho.
+
 ## WARNING
 This repo has barely anything in it right now, and is not usable yet. If you are interested in the concept watch the project to get notified, whenever somehing changes.  
 The features listed below are what the project will become, not what it is right now. This message will be removed, when the core functionality is implemented!
