@@ -1,6 +1,6 @@
 # Thesis-VK-core
-## THIS REPO IS FROZEN
-For a while, I won't work on this. Ill get to it eventually tho.
+## THIS REPO IS DEPRECATED
+I won't work on this anymore, I may get back to it at some point but that may take quite some time. For now don't even bother with this repo, there's nothing of value here
 
 ## WARNING
 This repo has barely anything in it right now, and is not usable yet. If you are interested in the concept watch the project to get notified, whenever somehing changes.  
